@@ -1,6 +1,6 @@
+import { useEffect } from "react";
+
 function Main(){
-
-
 
     return(
         <main>
@@ -13,8 +13,8 @@ function Main(){
                 <div className="items-content">
 
                     <div className="task-div">
-                        <span className="button"><input type="radio" name="radio"/></span>
-                        <p>Complete online Javascript course</p>
+                        <input type="checkbox" className="button"/>
+                        <p>{change}</p>
                         <button className="button cross"></button>
                     </div>
 

@@ -4,7 +4,6 @@
 
     /*Primary*/
     --brightBlue: hsl(220, 98%, 61%);
-    --degrade: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
 
     /*Light Theme*/
     --lightGray: hsl(0, 0%, 98%);
@@ -94,14 +93,15 @@ p{
 .button{
     background-color: transparent;
     border: 0;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     border-radius: 100%;
     border: 1px solid rgb(214, 213, 213);
     padding: 0;
-    margin: 0 20px;
+    margin: 0 10px 0 20px;
     cursor: pointer;
     display: inline-block;
+    flex-shrink: 0;
 }
 
 .main__form input{
@@ -145,17 +145,24 @@ p{
     display: flex;
     align-items: center;
     justify-content: center;
+    align-content: center;
     background-color: hsl(236, 33%, 92%);
     height: 50px;
+    width: 100%;
+    gap: 15px;
     border-radius: 8px;
 }
 .selection__items button{
     border: 0;
     background-color: transparent;
     cursor: pointer;
-    transition: all .2s ease-in-out;
     font-weight: bold;
-    color: hsl(236, 9%, 61%) 
+    transition: all .2s ease-in-out;
+    padding: 0;
+    color: hsl(236, 9%, 61%);
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
 }
 .selection__items button:hover{
     color: var(--brightBlue);
@@ -170,14 +177,25 @@ p{
     justify-content: flex-end;
     border-bottom: 1px solid var(--desaturatedBlue);
 }
-.button input[type="radio"]{
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
+ input[type="checkbox"]{
+    appearance: none;
+    position: relative;
 }
-input[type="radio"]:checked span[class="button"]{
-    background-color: blue;
+input[type="checkbox"]:checked{
+    background-image: linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+input[type="checkbox"]:checked::after{
+    content: "";
+    height: 5px;
+    width: 11px;
+    display: block;
+    position: absolute;
+    border: 2px solid var(--lightGray);
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    top: 8px;
+    left: 6px;
 }
 
 .task-div p{
@@ -189,6 +207,8 @@ input[type="radio"]:checked span[class="button"]{
     background-repeat: no-repeat;
     background-size: contain;
     border: 0;
+    height: 20px;
+    width: 20px;
     margin: 0 20px 0 auto;
 }
 
