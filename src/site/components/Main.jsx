@@ -1,40 +1,50 @@
 import React, { useEffect } from "react";
+import { useState } from "react";
+import { scryRenderedComponentsWithType } from "react-dom/test-utils";
 
 function Main(){
-    let arr = [];
-    let generated = 0;
-
+    let generated = null;
+    let arr2 = [];
     function createDiv(){
         generated = (
-            <div className="task-div">
+            <div key={Math.random()} className="task-div">
             <input type="checkbox" className="button"/>
             <p>{document.querySelector(".main__form input").value}</p>
             <button className="button cross"></button>
             </div>
         )
-    }
-
-    function task(){
-        createDiv();
-        arr.push(generated);
-        console.log(arr);
+        arr2.unshift(generated);
+        console.log(arr2);
+        change(arr2);
     }
     
+    const [arr, change] = useState([]);
 
+    // function task(){
+        
+    //     createDiv();
+    //     change([generated]);
+    //     console.log(arr)
+    // }
+    function task(){
+        createDiv();
+        
+
+    }
+    
+        
     return(
         <main>
             <div className="border content-main">
                 <form className="main__form">
-                    <button type="button" onClick={() => task()} className="button"></button>
+                    <button type="button" onClick={() => {
+                        task()
+                    } } className="button"></button>
                     <input type="text" placeholder="Create a new todo..."/>
                 </form>
 
                 <div className="items-content">
-
-                    {useEffect(() => {
-                        <h1>oi</h1>
-                    },arr)}
-
+                    {arr}
                     <div className="items__info items-color">
                         <p>{} items left</p>
                         <p>Clear Completed</p>
