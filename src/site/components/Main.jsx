@@ -1,35 +1,26 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
+import GeneratedTodo from "./GeneratedTodo";
 
 export default function Main(){
-    let generated = null;
     let [arr, change] = useState([]);
-
-    function createDiv(){
-        generated = (
-            <div key={Math.random()} name={Math.random()} className="task-div">
-            <input type="checkbox" className="button"/>
-            <p>{document.querySelector(".main__form input").value}</p>
-            <button className="button cross" onClick={(e) => removeElement(e.target.parentNode.getAttribute("name"))}></button>
-            </div>
-        )
-    }
 
     let [lenghtArray, changeLength] = useState(0);
     useEffect(() =>{
         changeLength(arr.length);
-        console.log(arr)
+        console.log(arr);
     },[arr])
+
     
-    const removeElement = (e) => {
+    function removeDiv(e){
         console.log(e);
-        change(arr.filter(item => item.name !== e))
+        console.log(arr);
+        change(arr.filter(item => item.name !== e.name));
     }
 
     function task(){
         if(document.querySelector(".main__form input").value !== ''){
-            createDiv();
-            change([...arr,generated]);
+            change([...arr,<GeneratedTodo/>]);
         }
     }
     
@@ -47,7 +38,14 @@ export default function Main(){
                 </form>
 
                 <div className="items-content">
-                    {arr}
+                    {arr.map((todo, id) =>{
+                        console.log("entrou");
+                        
+                        console.log(arr)
+                        return(
+                            <GeneratedTodo deleteFunction={removeDiv} keyGive={Math.random()} nameGive={Math.random()}/>
+                        );
+                    })}
                     <div className="items__info items-color">
                         <p>{lenghtArray} items left</p>
                         <p>Clear Completed</p>
