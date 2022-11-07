@@ -7,35 +7,60 @@ export default function Main(){
     let [newArr, changeNew] = useState([]);
     let [id, changeId] = useState(0);
 
-    
     useEffect(()=>{
         changeNew([...arr]);
-        console.log(arr)
     }, [arr]);
 
     function removeDiv(id){
+        changeNew(newArr.filter(item => item.id !== id));
         changeArr(arr.filter(item => item.id !== id));
     }
 
-    function checkedBox(todo){
+    function checkedBox(todo,change){
         todo.completed = !todo.completed;
+        change(todo.completed);
     }
 
-    function filterNotCheck(){
+    function activatedLink(calledButton){
+        const buttons = document.querySelectorAll(".selection__items button");
+        buttons.forEach(element => {
+            element.removeAttribute("class");
+        })
+        calledButton.classList.add("active");
+    }
+
+    function changeNewArr(){
+        changeNew(newArr);
+    }
+
+    function filterNotCompleted(button){
+        activatedLink(button);
         newArr = arr.filter(elements => !elements.completed);
-        changeNew(newArr);
+        changeNewArr();
     }
 
-    function filterCheck(){
+    function filterCompleted(button){
+        activatedLink(button);
         newArr = arr.filter(elements => elements.completed);
-        changeNew(newArr);
+        changeNewArr();
+    }
+
+    function filterAll(button){
+        activatedLink(button);
+        newArr = arr.filter(elements => elements);
+        changeNewArr();
+    }
+
+    function clearComplete(){
+        newArr = arr.filter(elements => !elements.completed)
+        changeNewArr();
+        changeArr(newArr);
     }
 
     function task(){
         if(document.querySelector(".main__form input").value !== ''){
             const todoObj = {text: document.querySelector(".main__form input").value, id: id, completed: false};
             changeId(++id);
-            console.log(id)
             changeArr([...arr,todoObj]);
         }
     }
@@ -65,13 +90,13 @@ export default function Main(){
 
                     <div className="items__info items-color">
                         <p>{newArr.length} items left</p>
-                        <button onClick={() => }>Clear Completed</button>
+                        <button onClick={() => clearComplete()}>Clear Completed</button>
                     </div>
 
                     <div className="selection__items">
-                        <button type="button" onClick={() => changeNew(arr)}>All</button>
-                        <button type="button" onClick={() => filterNotCheck()}>Active</button>
-                        <button type="button" onClick={() => filterCheck()}>Completed</button>
+                        <button type="button" onClick={(e) => filterAll(e.target)}>All</button>
+                        <button type="button" onClick={(e) => filterNotCompleted(e.target)}>Active</button>
+                        <button type="button" onClick={(e) => filterCompleted(e.target)}>Completed</button>
                     </div>
                 </div>
                 

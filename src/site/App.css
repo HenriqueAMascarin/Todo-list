@@ -164,7 +164,7 @@ p{
     vertical-align: middle;
     display: inline-block;
 }
-.selection__items button:hover{
+.selection__items button:hover, .selection__items button.active{
     color: var(--brightBlue);
 }
 .task-div{
