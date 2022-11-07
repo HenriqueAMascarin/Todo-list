@@ -3,24 +3,40 @@ import { useEffect } from "react";
 import GeneratedTodo from "./GeneratedTodo";
 
 export default function Main(){
-    let [arr, change] = useState([]);
-
-    let [lenghtArray, changeLength] = useState(0);
-    useEffect(() =>{
-        changeLength(arr.length);
-        console.log(arr);
-    },[arr])
+    let [arr, changeArr] = useState([]);
+    let [newArr, changeNew] = useState([]);
+    let [id, changeId] = useState(0);
 
     
-    function removeDiv(e){
-        console.log(e);
-        console.log(arr);
-        change(arr.filter(item => item.name !== e.name));
+    useEffect(()=>{
+        changeNew([...arr]);
+        console.log(arr)
+    }, [arr]);
+
+    function removeDiv(id){
+        changeArr(arr.filter(item => item.id !== id));
+    }
+
+    function checkedBox(todo){
+        todo.completed = !todo.completed;
+    }
+
+    function filterNotCheck(){
+        newArr = arr.filter(elements => !elements.completed);
+        changeNew(newArr);
+    }
+
+    function filterCheck(){
+        newArr = arr.filter(elements => elements.completed);
+        changeNew(newArr);
     }
 
     function task(){
         if(document.querySelector(".main__form input").value !== ''){
-            change([...arr,<GeneratedTodo/>]);
+            const todoObj = {text: document.querySelector(".main__form input").value, id: id, completed: false};
+            changeId(++id);
+            console.log(id)
+            changeArr([...arr,todoObj]);
         }
     }
     
@@ -38,23 +54,24 @@ export default function Main(){
                 </form>
 
                 <div className="items-content">
-                    {arr.map((todo, id) =>{
-                        console.log("entrou");
-                        
-                        console.log(arr)
+
+                    {newArr.map((todo) =>{
                         return(
-                            <GeneratedTodo deleteFunction={removeDiv} keyGive={Math.random()} nameGive={Math.random()}/>
+                            <div className="task-div" key={todo.id}>
+                                <GeneratedTodo deleteFunction={removeDiv} todo={todo} checkedBox={checkedBox}/>
+                            </div>
                         );
                     })}
+
                     <div className="items__info items-color">
-                        <p>{lenghtArray} items left</p>
-                        <p>Clear Completed</p>
+                        <p>{newArr.length} items left</p>
+                        <button onClick={() => }>Clear Completed</button>
                     </div>
 
                     <div className="selection__items">
-                        <button type="button">All</button>
-                        <button type="button">Active</button>
-                        <button type="button">Completed</button>
+                        <button type="button" onClick={() => changeNew(arr)}>All</button>
+                        <button type="button" onClick={() => filterNotCheck()}>Active</button>
+                        <button type="button" onClick={() => filterCheck()}>Completed</button>
                     </div>
                 </div>
                 

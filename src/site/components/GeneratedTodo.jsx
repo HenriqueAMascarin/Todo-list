@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function GeneratedTodo({deleteFunction,keyGive, nameGive}){
+export default function GeneratedTodo({deleteFunction, todo, checkedBox}){
     return(
-        <div key={keyGive} name={nameGive} className="task-div">
-            <input type="checkbox" className="button"/>
-            <p>{document.querySelector(".main__form input").value}</p>
-            <button className="button cross" onClick={(e) => deleteFunction(e)}></button>
-        </div>
+        <>
+            <input type="checkbox" className="button" onChange={() => checkedBox(todo)}/>
+            <p>{todo.text}</p>
+            <button className="button cross" onClick={(e) => deleteFunction(todo.id)}></button>
+        </>
     )
 }
