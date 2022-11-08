@@ -24,7 +24,7 @@ export default function Main(){
     function activatedLink(calledButton){
         const buttons = document.querySelectorAll(".selection__items button");
         buttons.forEach(element => {
-            element.removeAttribute("class");
+            element.classList.remove("active");
         })
         calledButton.classList.add("active");
     }
@@ -88,15 +88,15 @@ export default function Main(){
                         );
                     })}
 
-                    <div className="items__info items-color">
+                    <div className="items__info">
                         <p>{newArr.length} items left</p>
-                        <button onClick={() => clearComplete()}>Clear Completed</button>
+                        <button className="selection-button" onClick={() => clearComplete()}>Clear Completed</button>
                     </div>
 
                     <div className="selection__items">
-                        <button type="button" onClick={(e) => filterAll(e.target)}>All</button>
-                        <button type="button" onClick={(e) => filterNotCompleted(e.target)}>Active</button>
-                        <button type="button" onClick={(e) => filterCompleted(e.target)}>Completed</button>
+                        <button type="button" className="selection-button" onClick={(e) => filterAll(e.target)}>All</button>
+                        <button type="button" className="selection-button" onClick={(e) => filterNotCompleted(e.target)}>Active</button>
+                        <button type="button" className="selection-button" onClick={(e) => filterCompleted(e.target)}>Completed</button>
                     </div>
                 </div>
                 
