@@ -59,8 +59,10 @@ export default function Main(){
 
     function task(){
         if(document.querySelector(".main__form input").value !== ''){
-            const todoObj = {text: document.querySelector(".main__form input").value, id: id, completed: false};
+            let inputText = document.querySelector(".main__form input");
+            const todoObj = {text: inputText.value, id: id, completed: false};
             changeId(++id);
+            inputText.value = "";
             changeArr([...arr,todoObj]);
         }
     }
