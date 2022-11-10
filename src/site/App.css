@@ -24,10 +24,6 @@
     --veryDarkGrayish: hsl(237, 14%, 26%);
 }
 
-html,body{
-    height: 100%;
-    min-height: 100vh;
-}
 body {
     margin: 0;
     font-family: "JosefinSans", Arial, Helvetica, sans-serif;
@@ -35,8 +31,16 @@ body {
     -moz-osx-font-smoothing: grayscale;
     font-size: 18px;
 }
+
 p{
     margin: 0;
+}
+
+.App{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .border{
@@ -75,7 +79,7 @@ p{
     cursor: pointer;
     padding: 0;
 }
-.header__div button img{
+.img-theme{
     width: 100%;
     height: 100%;
 }
@@ -132,7 +136,7 @@ p{
 .items__info{
     display: flex;
     background-color: white;
-    border-radius: 0 0 8px 8px;
+    border-radius: 8px 8px 8px 8px;
     justify-content: space-between;
     padding: 0 1em;
     align-items: center;
@@ -140,6 +144,10 @@ p{
     height: var(--divWidth);
     font-size: 0.8em;
 }
+.task-div + .items__info {
+    border-radius: 0px 0px 8px 8px;
+}
+
 .items__info p{
     color: var(--darkGrayishBlue);
 }
@@ -174,41 +182,64 @@ p{
 .selection-button.active{
     color: var(--brightBlue);
 }
+
 .task-div{
     display: flex;
     background-color: white;
-    border-radius: 8px 8px 0 0;
+    border-radius: 0px 0px 0 0;
     padding: 0;
     height: var(--divWidth);
     align-items: center;
     justify-content: flex-end;
     border-bottom: 1px solid var(--darkGrayishBlue);
 }
-.task-div input[type="checkbox"]{
-    appearance: none;
+.span-checkbox{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 100%;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px 0 20px;
 }
-.task-div input[type="checkbox"]:checked{
+
+.span-checkbox:has(.checkbox:hover){   
     background-image: linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 }
-.task-div:has(input[type="checkbox"]:checked) p {
+.checkbox:hover:not(:checked){   
+    background-color: white;
+    border: 0;
+}
+
+.span-checkbox .checkbox{
+    appearance: none;
+    position: relative;
+    margin: 0;
+    z-index: 1;
+}
+.task-div:nth-of-type(1){
+    border-radius: 8px 8px 0 0;
+}
+.task-div .checkbox:checked{
+    background-image: linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.task-div:has(.checkbox:checked) p{
     color: var(--darkGrayishBlue);
     text-decoration: line-through;
 }
-.task-div input[type="checkbox"]:hover{
-    border:  1px solid hsl(280, 87%, 65%);
-}
-.task-div input[type="checkbox"]:checked::after{
+.span-checkbox .checkbox:checked::after{
     content: "";
-    height: 5px;
-    width: 11px;
+    height: 15px;
+    width: 15px;
     display: block;
     position: absolute;
-    border: 2px solid var(--lightGray);
-    border-top: none;
-    border-right: none;
-    transform: rotate(-45deg);
-    top: 8px;
+    background-image: url(/public/images/icon-check.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    top: 6px;
     left: 6px;
 }
 
@@ -226,13 +257,36 @@ p{
     margin: 0 20px 0 auto;
 }
 
-.attribution { font-size: 11px; text-align: center; margin-top: auto;}
+.footer{
+    margin-top: auto;
+    
+}
+
+.attribution { font-size: 11px; text-align: center;margin: 0 30px 10px;}
 .attribution a { color: hsl(228, 45%, 44%); }
+
+body:has(.dark-theme){
+    background-color: var(--desaturatedBlue);
+}
+
+.dark-theme .img-theme{
+    content: url(/public/images/icon-sun.svg);
+}
+.dark-theme .attribution{
+    color: white;
+}
+.dark-theme .header{
+    background-image: url(/public/images/bg-mobile-dark.jpg);
+}
+
 
 @media screen and (min-width: 1024px){
     .header{
         background-image: url(/public/images/bg-desktop-light.jpg);
         background-size: cover;
         background-position: center;
+    }
+    .dark-theme .header{
+        background-image: url(/public/images/bg-desktop-dark.jpg);
     }
 }
