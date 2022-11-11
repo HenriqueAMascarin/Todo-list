@@ -15,7 +15,7 @@
     --veryDarkGrayishBlue: hsl(235, 19%, 35%);
     
     /*Dark Theme*/
-    --darkBlue: hsl(235, 21%, 11%);
+    --darkenBlue: hsl(235, 21%, 11%);
     --desaturatedBlue: hsl(235, 24%, 19%);
     --normalGrayishBlue: hsl(234, 39%, 85%);
     --hoverGrayishBlue: hsl(236, 33%, 92%);
@@ -30,6 +30,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 18px;
+    transition: background-color .4s ease-in-out;
 }
 
 p{
@@ -54,6 +55,7 @@ p{
     background-image: url(/public/images/bg-mobile-light.jpg);
     background-size: cover;
     background-position: center;
+    transition: background-image .4s ease-in-out;
 }
 .header__div{
     display: flex;
@@ -82,6 +84,7 @@ p{
 .img-theme{
     width: 100%;
     height: 100%;
+    transition: content .4s ease-in-out;
 }
 .content-main{
     position: relative;
@@ -192,6 +195,7 @@ p{
     align-items: center;
     justify-content: flex-end;
     border-bottom: 1px solid var(--darkGrayishBlue);
+    transition: background-color .4s ease-in-out;
 }
 .span-checkbox{
     width: 30px;
@@ -262,13 +266,27 @@ p{
     
 }
 
-.attribution { font-size: 11px; text-align: center;margin: 0 30px 10px;}
+.attribution { 
+    font-size: 11px; 
+    text-align: center;
+    margin: 0 30px 10px;
+    transition: color .4s ease-in-out;
+}
 .attribution a { color: hsl(228, 45%, 44%); }
 
-body:has(.dark-theme){
-    background-color: var(--desaturatedBlue);
+.span-checkbox p{
+    transition: color .4s ease-in-out;
+}
+.dark-theme .task-div{
+    color: white;
+}
+.task-div, .items__info, .selection__items, .main__form{
+    transition: background-color .4s ease-in-out;
 }
 
+body:has(.dark-theme){
+    background-color: var(--darkenBlue);
+}
 .dark-theme .img-theme{
     content: url(/public/images/icon-sun.svg);
 }
@@ -279,6 +297,13 @@ body:has(.dark-theme){
     background-image: url(/public/images/bg-mobile-dark.jpg);
 }
 
+.dark-theme .task-div, .dark-theme .items__info, .dark-theme .selection__items, .dark-theme .main__form{
+    background-color: var(--desaturatedBlue);
+}
+
+.dark-theme .checkbox:hover:not(:checked){   
+    background-color: var(--desaturatedBlue);
+}
 
 @media screen and (min-width: 1024px){
     .header{
