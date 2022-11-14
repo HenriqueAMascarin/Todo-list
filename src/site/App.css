@@ -197,6 +197,10 @@ p{
     justify-content: flex-end;
     border-bottom: 1px solid var(--darkGrayishBlue);
     transition: background-color .4s ease-in-out;
+    cursor: move;
+}
+.task-div p{
+    font-size: 14px;
 }
 .span-checkbox{
     width: 30px;
@@ -248,9 +252,6 @@ p{
     left: 6px;
 }
 
-.task-div p{
-    font-size: 14px;
-}
 .cross{
     background-image: url(/public/images/icon-cross.svg);
     background-position: center;

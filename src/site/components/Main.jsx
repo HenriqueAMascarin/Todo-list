@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import { useEffect } from "react";
+import React, {useState ,useRef, useEffect} from "react";
 import GeneratedTodo from "./GeneratedTodo";
 
 export default function Main(){
@@ -67,6 +66,11 @@ export default function Main(){
             changeArr([...arr,todoObj]);
         }
     }
+
+    let dragItem = useRef(null);
+    useEffect(()=>{
+        console.log(dragItem);
+    }, [dragItem])
     
     return(
         <main>
@@ -86,7 +90,7 @@ export default function Main(){
 
                     {newArr.map((todo) =>{
                         return(
-                            <div className="task-div" key={todo.id}>
+                            <div className="task-div" key={todo.id} draggable onDragStart={() => dragItem=(todo.id)}>
                                 <GeneratedTodo deleteFunction={removeDiv} todo={todo} checkedBox={checkedBox}/>
                             </div>
                         );
