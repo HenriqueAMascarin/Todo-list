@@ -102,6 +102,8 @@ export default function Main(){
                             <button type="button" className="selection-button" onClick={(e) => filterCompleted(e.target)}>Completed</button>
                         </div>
                     </div>
+
+                    <p className="drag-text">Drag and drop to reorder list</p>
                     
                 </div>
                 

@@ -266,17 +266,10 @@ p{
     margin-top: auto;
 }
 
-.attribution { 
-    font-size: 11px; 
-    text-align: center;
-    margin: 0 30px 10px;
-    transition: color .4s ease-in-out;
-}
-.attribution a { color: hsl(228, 45%, 44%); }
-
 .span-checkbox p{
     transition: color .4s ease-in-out;
 }
+
 .dark-theme .task-div{
     color: white;
 }
@@ -289,9 +282,6 @@ body:has(.dark-theme){
 }
 .dark-theme .img-theme{
     content: url(/public/images/icon-sun.svg);
-}
-.dark-theme .attribution{
-    color: white;
 }
 .dark-theme .header{
     background-image: url(/public/images/bg-mobile-dark.jpg);
@@ -306,6 +296,30 @@ body:has(.dark-theme){
 }
 
 .dark-theme .selection-button:hover{
+    color: white;
+}
+.dark-theme .attribution{
+    color: white;
+}
+
+.attribution { 
+    font-size: 11px; 
+    text-align: center;
+    margin: 0 30px 10px;
+    transition: color .4s ease-in-out;
+}
+.attribution a { color: hsl(228, 45%, 44%); }
+
+.drag-text{
+    color: var(--darkGrayishBlue);
+    margin-top: 30px;
+    text-align: center;
+    transition: color .4s ease-in-out;
+}
+.drag-text:hover{
+    color: var(--desaturatedBlue);
+}
+.dark-theme .drag-text:hover{
     color: white;
 }
 
