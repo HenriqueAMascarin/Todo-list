@@ -59,8 +59,9 @@ export default function Main(){
 
     function task(){
         if(document.querySelector(".main__form input").value !== ''){
-            let inputText = document.querySelector(".main__form input");
-            const todoObj = {text: inputText.value, id: id, completed: false};
+            let inputText = document.querySelector(".text-input");
+            let checkedBox = document.querySelector(".main__form .checkbox");
+            const todoObj = {text: inputText.value, id: id, completed: checkedBox.checked};
             changeId(++id);
             inputText.value = "";
             changeArr([...arr,todoObj]);
@@ -71,13 +72,14 @@ export default function Main(){
         <main>
             <div className="border content-main">
                 <form className="main__form" onSubmit={(e) => e.preventDefault()}>
-                    <button type="button" onClick={() => task()} className="button"></button>
-                    <input type="text" onKeyDown={(e) => {
+                    <span className="span-checkbox">
+                        <input type="checkbox" className="button checkbox" aria-label="change the state of todo"/>
+                    </span>
+                    <input type="text" className="text-input" placeholder="Create a new todo..." onKeyDown={(e) => {
                         if(e.key === "Enter"){
                             task();
                         }
-
-                    }} placeholder="Create a new todo..."/>
+                    }}/>
                 </form>
 
                 <div className="items-content">
@@ -89,17 +91,18 @@ export default function Main(){
                             </div>
                         );
                     })}
-
-                    <div className="items__info">
-                        <p>{newArr.length} items left</p>
-                        <button className="selection-button" onClick={() => clearComplete()}>Clear Completed</button>
+                    <div className="selection-box">
+                        <div className="items__info">
+                            <p>{newArr.length} items left</p>
+                            <button className="selection-button" onClick={() => clearComplete()}>Clear Completed</button>
+                        </div>
+                        <div className="selection__items">
+                            <button type="button" className="selection-button" onClick={(e) => filterAll(e.target)}>All</button>
+                            <button type="button" className="selection-button" onClick={(e) => filterNotCompleted(e.target)}>Active</button>
+                            <button type="button" className="selection-button" onClick={(e) => filterCompleted(e.target)}>Completed</button>
+                        </div>
                     </div>
-
-                    <div className="selection__items">
-                        <button type="button" className="selection-button" onClick={(e) => filterAll(e.target)}>All</button>
-                        <button type="button" className="selection-button" onClick={(e) => filterNotCompleted(e.target)}>Active</button>
-                        <button type="button" className="selection-button" onClick={(e) => filterCompleted(e.target)}>Completed</button>
-                    </div>
+                    
                 </div>
                 
             </div>

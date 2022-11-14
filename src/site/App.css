@@ -8,29 +8,21 @@
     --brightBlue: hsl(220, 98%, 61%);
 
     /*Light Theme*/
-    --lightGray: hsl(0, 0%, 98%);
-    --veryGrayishBlue: hsl(236, 33%, 92%);
-    --lightGrayishBlue: hsl(233, 11%, 84%);
     --darkGrayishBlue: hsl(236, 9%, 61%);
-    --veryDarkGrayishBlue: hsl(235, 19%, 35%);
     
     /*Dark Theme*/
     --darkenBlue: hsl(235, 21%, 11%);
     --desaturatedBlue: hsl(235, 24%, 19%);
-    --normalGrayishBlue: hsl(234, 39%, 85%);
-    --hoverGrayishBlue: hsl(236, 33%, 92%);
-    --darkBlue: hsl(234, 11%, 52%);
-    --veryDarkBlue: hsl(233, 14%, 35%);
-    --veryDarkGrayish: hsl(237, 14%, 26%);
 }
 
-body {
+body{
     margin: 0;
     font-family: "JosefinSans", Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 18px;
     transition: background-color .4s ease-in-out;
+    overflow-x: hidden;
 }
 
 p{
@@ -66,7 +58,7 @@ p{
 }
 .header__div h1{
     margin: 0;
-    color: var(--lightGray);
+    color: white;
     letter-spacing: 0.3em;
     display: inline-block;
     font-weight: bold;
@@ -114,7 +106,7 @@ p{
     flex-shrink: 0;
 }
 
-.main__form input{
+.main__form .text-input{
     height: 100%;
     width: 80%;
     border: 0;
@@ -136,18 +128,26 @@ p{
     width: 100%;
     margin-top: 1em;
 }
+
+.selection-box{
+    display: inline-flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .items__info{
     display: flex;
     background-color: white;
     border-radius: 8px 8px 8px 8px;
     justify-content: space-between;
-    padding: 0 1em;
+    padding: 0 20px;
     align-items: center;
     margin-bottom: 1em;
     height: var(--divWidth);
     font-size: 0.8em;
 }
-.task-div + .items__info {
+.task-div + .selection-box .items__info {
     border-radius: 0px 0px 8px 8px;
 }
 
@@ -166,6 +166,7 @@ p{
     gap: 15px;
     border-radius: 8px;
 }
+
 .selection-button{
     border: 0;
     background-color: transparent;
@@ -226,7 +227,7 @@ p{
 .task-div:nth-of-type(1){
     border-radius: 8px 8px 0 0;
 }
-.task-div .checkbox:checked{
+.checkbox:checked{
     background-image: linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 }
 .task-div:has(.checkbox:checked) p{
@@ -263,7 +264,6 @@ p{
 
 .footer{
     margin-top: auto;
-    
 }
 
 .attribution { 
@@ -305,6 +305,10 @@ body:has(.dark-theme){
     background-color: var(--desaturatedBlue);
 }
 
+.dark-theme .selection-button:hover{
+    color: white;
+}
+
 @media screen and (min-width: 1024px){
     .header{
         background-image: url(/public/images/bg-desktop-light.jpg);
@@ -314,4 +318,35 @@ body:has(.dark-theme){
     .dark-theme .header{
         background-image: url(/public/images/bg-desktop-dark.jpg);
     }
+
+    .selection-box{
+        display: flex;
+        width: 100%;
+        height: var(--divWidth);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px 8px 8px 8px;
+        box-sizing: content-box;
+        transition: background-color .4s ease-in-out;
+    }
+    .dark-theme .selection-box{
+        background-color: var(--desaturatedBlue);
+    }
+    .task-div + .selection-box {
+        border-radius: 0px 0px 8px 8px;
+    }
+    
+    .selection__items{
+        width: 50%;
+        position: relative;
+        z-index: 1;
+    }
+    .items__info{
+        width: 100%;
+        margin: 0;
+        position: absolute;
+        box-sizing: border-box;
+    }
+
 }
