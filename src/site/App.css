@@ -64,19 +64,26 @@ p{
     font-weight: bold;
     text-transform: uppercase;
 }
-.header__div button{
+.header__btn{
     background-color: transparent;
     width: fit-content;
     height: 1.5em;
     border: 0;
     display: inline-block;
     cursor: pointer;
-    padding: 0;
+    padding: 10px;
+    box-sizing: content-box;
+    border: 1px solid var(--darkGrayishBlue);
+    border-radius: 30px;
+    transition: .4s border;
+}
+.header__btn:hover{
+    border: 1px solid white;
 }
 .img-theme{
     width: 100%;
     height: 100%;
-    transition: content .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
 .content-main{
     position: relative;
@@ -310,19 +317,6 @@ body:has(.dark-theme){
     transition: color .4s ease-in-out;
 }
 .attribution a { color: hsl(228, 45%, 44%); }
-
-.drag-text{
-    color: var(--darkGrayishBlue);
-    margin-top: 30px;
-    text-align: center;
-    transition: color .4s ease-in-out;
-}
-.drag-text:hover{
-    color: var(--desaturatedBlue);
-}
-.dark-theme .drag-text:hover{
-    color: white;
-}
 
 @media screen and (min-width: 1024px){
     .header{

@@ -5,14 +5,19 @@ export default function Main(){
     let [arr, changeArr] = useState([]);
     let [newArr, changeNew] = useState([]);
     let [id, changeId] = useState(0);
+    let [isFunction, changeIsFunction] = useState(false);
 
     useEffect(()=>{
-        changeNew([...arr]);
+        isFunction = isFunction ? true : changeNew([...arr]);
+        if(newArr.length <= 0){
+            console.log("oi")
+            reset();
+        }
     }, [arr]);
 
     function removeDiv(id){
-        changeNew(newArr.filter(item => item.id !== id));
         changeArr(arr.filter(item => item.id !== id));
+        changeNew(newArr.filter(item => item.id !== id));
     }
 
     function checkedBox(todo,change){
@@ -21,7 +26,7 @@ export default function Main(){
     }
 
     function activatedLink(calledButton){
-        const buttons = document.querySelectorAll(".selection__items button");
+        const buttons = document.querySelectorAll(".selection__items .selection-button");
         buttons.forEach(element => {
             element.classList.remove("active");
         })
@@ -33,12 +38,14 @@ export default function Main(){
     }
 
     function filterNotCompleted(button){
+        changeIsFunction(true);
         activatedLink(button);
         newArr = arr.filter(elements => !elements.completed);
         changeNewArr();
     }
 
     function filterCompleted(button){
+        changeIsFunction(true);
         activatedLink(button);
         newArr = arr.filter(elements => elements.completed);
         changeNewArr();
@@ -56,6 +63,11 @@ export default function Main(){
         changeArr(newArr);
     }
 
+    function reset(){
+        filterAll(document.querySelectorAll(".selection__items .selection-button")[0]);
+        changeIsFunction(false);
+    }
+
     function task(){
         if(document.querySelector(".main__form input").value !== ''){
             let inputText = document.querySelector(".text-input");
@@ -63,14 +75,10 @@ export default function Main(){
             const todoObj = {text: inputText.value, id: id, completed: checkedBox.checked};
             changeId(++id);
             inputText.value = "";
+            reset();
             changeArr([...arr,todoObj]);
         }
     }
-
-    let dragItem = useRef(null);
-    useEffect(()=>{
-        console.log(dragItem);
-    }, [dragItem])
     
     return(
         <main>
@@ -90,7 +98,7 @@ export default function Main(){
 
                     {newArr.map((todo) =>{
                         return(
-                            <div className="task-div" key={todo.id} draggable onDragStart={() => dragItem=(todo.id)}>
+                            <div className="task-div" key={todo.id}>
                                 <GeneratedTodo deleteFunction={removeDiv} todo={todo} checkedBox={checkedBox}/>
                             </div>
                         );
@@ -106,8 +114,6 @@ export default function Main(){
                             <button type="button" className="selection-button" onClick={(e) => filterCompleted(e.target)}>Completed</button>
                         </div>
                     </div>
-
-                    <p className="drag-text">Drag and drop to reorder list</p>
                     
                 </div>
                 
