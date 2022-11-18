@@ -25,7 +25,7 @@ Os usuários devem conseguir acessar um site responsivo que funcione bem o siste
 
 ### Links
 
-- Frontend Mentor URL: 
+- Frontend Mentor URL: https://www.frontendmentor.io/solutions/react-js-todo-app-RXXbJUntdt
 - URL do site: https://todo-list-inky-beta.vercel.app.
 
 ### Tecnologias usadas
