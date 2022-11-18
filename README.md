@@ -21,7 +21,7 @@ Os usuários devem conseguir acessar um site responsivo que funcione bem o siste
 
 ### Screenshot
 
-![](./images/design-screenshot.jpg)
+![](./public/images/apresentacaoDesign.jpg)
 
 ### Links
 
