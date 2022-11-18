@@ -32,10 +32,11 @@ Os usuários devem conseguir acessar um site responsivo que funcione bem o siste
 
 - React Js.
 - React Hooks.
+- ARIA acessibilidade.
 
 ### O que aprendi?
 
- Aprendi bastante sobre o React Js e gostei muito de usar mesmo tendo algumas dificuldades!
+ Aprendi bastante sobre o React Js e gostei muito de usar mesmo tendo algumas dificuldades,  também achei legal conhecer ARIA para leitores de tela!
 
 ### O que busco no futuro?
 
