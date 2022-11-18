@@ -1,4 +1,4 @@
-import React, {useState ,useRef, useEffect} from "react";
+import React, {useState , useEffect} from "react";
 import GeneratedTodo from "./GeneratedTodo";
 
 export default function Main(){
@@ -6,11 +6,11 @@ export default function Main(){
     let [newArr, changeNew] = useState([]);
     let [id, changeId] = useState(0);
     let [isFunction, changeIsFunction] = useState(false);
+    let [isButton, changeBtn] = useState(false);
 
     useEffect(()=>{
         isFunction = isFunction ? true : changeNew([...arr]);
         if(newArr.length <= 0){
-            console.log("oi")
             reset();
         }
     }, [arr]);
@@ -68,8 +68,16 @@ export default function Main(){
         changeIsFunction(false);
     }
 
+    function btnActive(textInput){
+        if(textInput.value !== "" && isButton === false){ 
+            changeBtn(true);
+        }else if(textInput.value === "" && isButton === true){
+            changeBtn(false);
+        }
+    }
+
     function task(){
-        if(document.querySelector(".main__form input").value !== ''){
+        if(document.querySelector(".text-input").value !== ''){
             let inputText = document.querySelector(".text-input");
             let checkedBox = document.querySelector(".main__form .checkbox");
             const todoObj = {text: inputText.value, id: id, completed: checkedBox.checked};
@@ -77,6 +85,8 @@ export default function Main(){
             inputText.value = "";
             reset();
             changeArr([...arr,todoObj]);
+            changeBtn(false);
+            inputText.focus();
         }
     }
     
@@ -87,11 +97,9 @@ export default function Main(){
                     <span className="span-checkbox">
                         <input type="checkbox" className="button checkbox" aria-label="change the state of todo"/>
                     </span>
-                    <input type="text" className="text-input" placeholder="Create a new todo..." onKeyDown={(e) => {
-                        if(e.key === "Enter"){
-                            task();
-                        }
-                    }}/>
+                    <input type="text" className="text-input" placeholder="Create a new todo..." onChange={(e) => btnActive(e.currentTarget)}/>
+                    <button className={isButton ? "button__create active" : "button__create"} onClick={(e) => task()}
+                    >Create</button>
                 </form>
 
                 <div className="items-content">
